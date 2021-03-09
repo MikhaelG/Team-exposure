@@ -15,12 +15,11 @@ public class enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D edgeleft = Physics2D.Raycast(transform.position, new Vector2(-2, -2), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER FÖR ATT FUNGERA
+        RaycastHit2D edgeleft = Physics2D.Raycast(transform.position, new Vector2(-2, -2), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA
         RaycastHit2D edgeright = Physics2D.Raycast(transform.position, new Vector2(2, -2), 5, 1);
         Debug.DrawRay(transform.position, new Vector2(-2, -2), Color.white);
         if (edgeleft.collider == null || edgeright.collider == null)
         {
-            print("succ");
             speed = -speed;
         } 
         body.velocity = new Vector2(speed, body.velocity.y);
