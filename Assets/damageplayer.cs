@@ -7,16 +7,11 @@ public class damageplayer : MonoBehaviour
 
     public int health = 5;
     public bool invultime = false;
-    private void Update()
+    private void Update() 
     {
         if (health<1)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //spelaren förstörs om dens liv blir under noll
         }
-    }
-    
-    IEnumerator invulsecs()
-    {
-        yield return new WaitForSeconds(1);
     }
 }
