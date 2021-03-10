@@ -9,7 +9,7 @@ public class enemymove : MonoBehaviour
     public bool pounce = false;
     public damageplayer damage;
     public bool invulsecs = false;
-    public float speed = -3;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +19,7 @@ public class enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3*speed, -1), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA kollar i riktningen som fienden rör sig i efter en kant
+        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3 * speed, -1), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA kollar i riktningen som fienden rör sig i efter en kant
         Debug.DrawRay(transform.position, new Vector3(3 * speed, -1), Color.white);
         if (pounce == false)
         {
@@ -55,7 +55,7 @@ public class enemymove : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         pounce = true;
-        body.velocity = new Vector2( speed*4, 1);
+        body.velocity = new Vector2(speed * 4, 1);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
