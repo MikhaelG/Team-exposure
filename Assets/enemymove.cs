@@ -8,6 +8,7 @@ public class enemymove : MonoBehaviour
     public float speed = -1;
     public bool pounce = false;
     public damageplayer damage;
+    public bool invulsecs = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,13 +18,13 @@ public class enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3*speed, -1), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA
+        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3*speed, -1), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA kollar i riktningen som fienden rör sig i efter en kant
         Debug.DrawRay(transform.position, new Vector3(3 * speed, -1), Color.white);
         if (pounce == false)
         {
             if (edge.collider == null)
             {
-                speed = -speed;
+                speed = -speed; // om den märker att det finns en kant framför sig så vänder den om
             }
         }
 
@@ -32,7 +33,7 @@ public class enemymove : MonoBehaviour
         if (groundcheck.collider != null)
         {
             pounce = false;
-            StartCoroutine(jumps());
+            StartCoroutine(jumps());// hoppar efter att den når marken
         }
 
         RaycastHit2D playercheck = Physics2D.Raycast(transform.position, new Vector2(5 * speed, 0), 5, 1);
@@ -40,7 +41,7 @@ public class enemymove : MonoBehaviour
 
         if (playercheck.collider != null)
         {
-            StartCoroutine(attack());
+            StartCoroutine(attack()); //kollar efter spelaren framför fienden. om den uptäcks så hoppar den mot spelaren
         }
     }
     IEnumerator jumps()
@@ -57,11 +58,18 @@ public class enemymove : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player")&& invulsecs == false)
         {
-            damage = collision.gameObject.GetComponent<damageplayer>();
-            damage.health--;
+            damage = collision.gameObject.GetComponent<damageplayer>(); // om fienden kolliderar med spelaren så skapar scriptet en referens till scriptet med health
+            damage.health--; //här tar spelet bort health från spelaren
             print(damage.health);
+            invulsecs = true;
+            StartCoroutine(invul()); // ser till  att spelaren har möjlighet att undanfly fienden
         }
+    }
+    IEnumerator invul()
+    {
+        yield return new WaitForSeconds(2);
+        invulsecs = false;
     }
 }
