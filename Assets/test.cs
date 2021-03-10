@@ -6,5 +6,4 @@ public class test : MonoBehaviour
 {
     //om du ser det här så funkar det
     //mer test
-    public int helt = 0;
 }

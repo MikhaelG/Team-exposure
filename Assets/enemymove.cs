@@ -9,6 +9,7 @@ public class enemymove : MonoBehaviour
     public bool pounce = false;
     public damageplayer damage;
     public bool invulsecs = false;
+    public float speed = -3;
     // Start is called before the first frame update
     void Start()
     {
