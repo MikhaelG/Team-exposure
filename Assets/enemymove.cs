@@ -9,7 +9,7 @@ public class enemymove : MonoBehaviour
     public bool pounce = false;
     public damageplayer damage;
     public bool invulsecs = false;
-    
+    public bool atacking = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +31,7 @@ public class enemymove : MonoBehaviour
 
         RaycastHit2D groundcheck = Physics2D.Raycast(transform.position, new Vector2(0,-2), 1, 1);
         Debug.DrawRay(transform.position, new Vector2(0, -1), Color.white);
-        if (groundcheck.collider != null)
+        if (groundcheck.collider != null && atacking == false)
         {
             pounce = false;
             StartCoroutine(jumps());// hoppar efter att den når marken
@@ -40,8 +40,10 @@ public class enemymove : MonoBehaviour
         RaycastHit2D playercheck = Physics2D.Raycast(transform.position, new Vector2(5 * speed, 0), 5, 1);
         Debug.DrawRay(transform.position, new Vector3(5 * speed, 0), Color.white);
 
-        if (playercheck.collider != null)
+        if (playercheck.collider != null && pounce == false)
         {
+            atacking = true;
+            StopCoroutine(jumps());
             StartCoroutine(attack()); //kollar efter spelaren framför fienden. om den uptäcks så hoppar den mot spelaren
         }
     }
@@ -56,6 +58,8 @@ public class enemymove : MonoBehaviour
         yield return new WaitForSeconds(1);
         pounce = true;
         body.velocity = new Vector2(speed * 4, 1);
+        yield return new WaitForSeconds(1);
+        atacking = false;
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
