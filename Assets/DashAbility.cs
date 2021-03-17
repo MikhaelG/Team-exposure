@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class DashAbility : MonoBehaviour
 {
+    Character2DController move;
     public float DashSpeed = 100;
     private Rigidbody2D rb;
     public bool hasDashed = false;
@@ -12,6 +13,7 @@ public class DashAbility : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        move = GetComponent<Character2DController>();
     }
 
     // Update is called once per frame
@@ -22,14 +24,17 @@ public class DashAbility : MonoBehaviour
             print("Dash");
             hasDashed = true; //Ställer om hasDashed till true när man dashar så att man inte kan göra det oändligt. - Daniel
             rb.AddForce(new Vector2(Input.GetAxis("Horizontal") * DashSpeed, 0)); //Multiplicerar karaktärens horizontal speed med Dashspeed och därmed gör så att man dashar åt det hållet. - Daniel
-            rb.velocity = new Vector3(rb.velocity.x, 0); //Fryser karaktärens Y-position så att man inte ska falla neråt under en dash, tyvärr fryser den endast positionen under en frame. - Daniel
+            rb.velocity = new Vector3(rb.velocity.x, 0); //Fryser karaktärens Y-position så att man inte ska falla neråt under en dash, tyvärr fryser den endast positionen under en frame. - Daniel       }
+            rb.constraints = RigidbodyConstraints2D.FreezePositionY; //Fryser karaktärens Y-position när den dashar. - Daniel
+            Invoke("StopDash", 1); //Väntar 1 sekdund och aktiverar StopDash. - Daniel
+            move.MoveAccess = false; //Ställer om MoveAccess från Character2DController till false. På så sätt kan man inte öka eller bromsa sin hastighet under en dash. - Daniel
         }
     }
-
-
-    private void StopDash()
+    void StopDash()
     {
-        //Invoke StopDash, få den att vänta tills dashen ska sluta och stoppa den efter det (Saker jag (Daniel) ska lägga till senare) - Daniel
+        rb.constraints = RigidbodyConstraints2D.None; //Tar bort alla constraints Rigidbody:n har under en dash. - Daniel
+        rb.velocity = new Vector2(0, 0); //Ställer tillbaka hastigheten man har efter dashen tar slut. På så sätt behåller man inte massvis med hastighet när dashen tar slut. - Daniel
+        move.MoveAccess = true; //Ställer tillbaka MoveAccess till true så att man kan hoppa och gå efter dashen tar slut. - Daniel
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
