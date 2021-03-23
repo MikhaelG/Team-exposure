@@ -68,7 +68,7 @@ public class enemymove : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             dash = collision.transform.GetComponent<DashAbility>();
-            if (dash.DMG == false && invulsecs == false)
+            if (dash.DMG == false && invulsecs == false) //Gör att man tar damage när man inte dashar och inte har invul frames. - Daniel
             {
                 damage = collision.gameObject.GetComponent<damageplayer>(); // om fienden kolliderar med spelaren så skapar scriptet en referens till scriptet med health
                 damage.health--; //här tar spelet bort health från spelaren
