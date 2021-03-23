@@ -20,7 +20,7 @@ public class DashAbility : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetButtonDown("Dash") && !hasDashed) //Kollar om man trycker på Dashknapppen och om hasDashed är false. - Daniel
+        if (Input.GetButtonDown("Dash") && !hasDashed && Input.GetAxis("Horizontal") != 0) //Kollar om man trycker på Dashknapppen och om hasDashed är false. - Daniel //Gör även att man inte kan dasha om man står still. - Gustav
         {
             print("Dash");
             hasDashed = true; //Ställer om hasDashed till true när man dashar så att man inte kan göra det oändligt. - Daniel
@@ -38,7 +38,7 @@ public class DashAbility : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation; //Fryzer rotationen så att karaktären inte faller ihop. - Daniel
         rb.velocity = new Vector2(0, 0); //Ställer tillbaka hastigheten man har efter dashen tar slut. På så sätt behåller man inte massvis med hastighet när dashen tar slut. - Daniel
         move.MoveAccess = true; //Ställer tillbaka MoveAccess till true så att man kan hoppa och gå efter dashen tar slut. - Daniel
-        DMG = false; //Ställer tillbaka DMG till false.
+        DMG = false; //Ställer tillbaka DMG till false. - Daniel
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
