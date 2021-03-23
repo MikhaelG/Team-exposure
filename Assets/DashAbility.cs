@@ -8,6 +8,7 @@ public class DashAbility : MonoBehaviour
     public float DashSpeed = 100;
     private Rigidbody2D rb;
     public bool hasDashed = false;
+    public bool DMG = false;
 
     // Start is called before the first frame update
     private void Start()
@@ -28,6 +29,7 @@ public class DashAbility : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezePositionY | RigidbodyConstraints2D.FreezeRotation; //Fryser karaktärens Y-position och rotationen när den dashar. - Daniel
             Invoke("StopDash", 1); //Väntar 1 sekdund och aktiverar StopDash. - Daniel
             move.MoveAccess = false; //Ställer om MoveAccess från Character2DController till false. På så sätt kan man inte öka eller bromsa sin hastighet under en dash. - Daniel
+            DMG = true;
         }
     }
     void StopDash()
@@ -36,6 +38,7 @@ public class DashAbility : MonoBehaviour
         rb.constraints = RigidbodyConstraints2D.FreezeRotation; //Fryzer rotationen så att karaktären inte faller ihop. - Daniel
         rb.velocity = new Vector2(0, 0); //Ställer tillbaka hastigheten man har efter dashen tar slut. På så sätt behåller man inte massvis med hastighet när dashen tar slut. - Daniel
         move.MoveAccess = true; //Ställer tillbaka MoveAccess till true så att man kan hoppa och gå efter dashen tar slut. - Daniel
+        DMG = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -43,6 +46,11 @@ public class DashAbility : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             hasDashed = false; //Ställer tillbaka hasDashed till true när man nuddar marken så att man kan dasha igen. - Daniel
+        }
+
+        if (collision.gameObject.CompareTag("Enemy") && DMG == true)
+        {
+            Destroy(collision.gameObject);
         }
     }
 }

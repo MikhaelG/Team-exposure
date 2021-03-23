@@ -8,12 +8,14 @@ public class enemymove : MonoBehaviour
     public float speed = -1;
     public bool pounce = false;
     public damageplayer damage;
+    DashAbility dash;
     public bool invulsecs = false;
     public bool atacking = false;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
+        dash = GetComponent<DashAbility>();
     }
 
     // Update is called once per frame
@@ -63,13 +65,17 @@ public class enemymove : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player")&& invulsecs == false)
+        if (collision.gameObject.CompareTag("Player"))
         {
-            damage = collision.gameObject.GetComponent<damageplayer>(); // om fienden kolliderar med spelaren så skapar scriptet en referens till scriptet med health
-            damage.health--; //här tar spelet bort health från spelaren
-            print(damage.health);
-            invulsecs = true;
-            StartCoroutine(invul()); // ser till  att spelaren har möjlighet att undanfly fienden
+            dash = collision.transform.GetComponent<DashAbility>();
+            if (dash.DMG == false && invulsecs == false)
+            {
+                damage = collision.gameObject.GetComponent<damageplayer>(); // om fienden kolliderar med spelaren så skapar scriptet en referens till scriptet med health
+                damage.health--; //här tar spelet bort health från spelaren
+                print(damage.health);
+                invulsecs = true;
+                StartCoroutine(invul()); // ser till  att spelaren har möjlighet att undanfly fienden
+            }
         }
     }
     IEnumerator invul()
