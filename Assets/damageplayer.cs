@@ -14,8 +14,8 @@ public class damageplayer : MonoBehaviour
     {
         if (health<1)
         {
-            SceneManager.LoadScene("level"); //spelaren förstörs om dens liv blir under noll
+            SceneManager.LoadScene("level"); //spelaren startar om när dens liv blir under noll - Gustav
         }
-        healthcount.text = "health:" + health;
+        healthcount.text = "health:" + health; // updaterar ui med health - Gustav
     }
 }
