@@ -7,6 +7,7 @@ public class victory : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        GameMaster.instance.resetcheckpoint();
         SceneManager.LoadScene("menu");
     }
 }
