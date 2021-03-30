@@ -7,12 +7,14 @@ public class animations : MonoBehaviour
     public Animator Animator;
     public float direction = 1;
     public Rigidbody2D rb;
+    public SpriteRenderer sprite;
 
     // Start is called before the first frame update
     void Start()
     {
         Animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -31,10 +33,10 @@ public class animations : MonoBehaviour
 
         if (direction == -1)
         {
-            gameObject.transform.localScale = new Vector3(-1, 1, 1); // vänder spelaren i lämplig rikttning utifrån riktningen som den senast gick mot - Gustav
+            sprite.flipX = true; // vänder spelaren i lämplig rikttning utifrån riktningen som den senast gick mot - Gustav
         } else
         {
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
+            sprite.flipX = false;
         }
         if (Input.GetButtonDown("Jump")) // startar animationen för att hoppa - Gustav
         {
