@@ -736,6 +736,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastCheckPointPos: {x: 0.3, y: -0.05}
+  startingposition: {x: 0.3, y: -0.05}
 --- !u!1 &374472877
 GameObject:
   m_ObjectHideFlags: 0
