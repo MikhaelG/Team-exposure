@@ -57,7 +57,7 @@ public class DashAbility : MonoBehaviour
 
         if (collision.gameObject.CompareTag("Boss") && DMG == true)
         {
-            boss.BossHP--;
+            boss.BossHP--; //Om man dashar in i ett objekt med tagen "Boss", vilket bossen kommer att ha, sänker man BossHP i Boss scriptet. - Daniel
         }
     }
 }
