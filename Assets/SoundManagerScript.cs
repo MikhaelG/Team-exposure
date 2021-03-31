@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-    public static AudioClip jumpSound, dashSound;
+    public static AudioClip jumpSound, dashSound; //de ljud som ska spelas - Mikhael
     static AudioSource audioSrc;
 
-    // Start is called before the first frame update
     void Start()
     {
-        jumpSound = Resources.Load<AudioClip>("jump");
+        jumpSound = Resources.Load<AudioClip>("jump"); //referenser
         dashSound = Resources.Load<AudioClip>("dash");
         audioSrc = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
     void Update()
     {
 
@@ -26,11 +24,11 @@ public class SoundManagerScript : MonoBehaviour
         switch (clip)
         {
             case "jump":
-                audioSrc.PlayOneShot(jumpSound);
+                audioSrc.PlayOneShot(jumpSound); //spela ljudet en gång när man hoppar - Mikhael
                 break;
 
             case "dash":
-                audioSrc.PlayOneShot(dashSound);
+                audioSrc.PlayOneShot(dashSound); //spela ljudet en gång när man gör dash - Mikhael
                 break;
         }
     }

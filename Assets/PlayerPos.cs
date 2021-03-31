@@ -10,15 +10,15 @@ public class PlayerPos : MonoBehaviour
     void Start()
     {
         gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
-        transform.position = gm.lastCheckPointPos;
+        transform.position = gm.lastCheckPointPos; //samma som i checkpoint scriptet - Mikhael
     }
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl))   //Respawna manuellt till sista checkpoint med left ctrl - Mikhael
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
         }
     }
 }
