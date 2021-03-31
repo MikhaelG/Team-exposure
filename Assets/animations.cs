@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class animations : MonoBehaviour
 {
-    public Animator Animator;
+    public UnityEngine.Animator Animator;
     public float direction = 1;
     public Rigidbody2D rb;
     public SpriteRenderer sprite;
+    public DashAbility dash;
 
     // Start is called before the first frame update
     void Start()
     {
-        Animator = GetComponent<Animator>();
+        Animator = GetComponent<UnityEngine.Animator>();
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
+        dash = GetComponent<DashAbility>();
     }
 
     // Update is called once per frame
@@ -45,5 +47,6 @@ public class animations : MonoBehaviour
         {
             Animator.SetFloat("jump", rb.velocity.y);
         }
+        Animator.SetBool("dashing", dash.DMG);
     }
 }
