@@ -26,7 +26,7 @@ public class enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3 * speed, -1), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA kollar i riktningen som fienden rör sig i efter en kant - Gustav
+        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3 * speed, -1), 5*raycastdist, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA kollar i riktningen som fienden rör sig i efter en kant - Gustav
         Debug.DrawRay(transform.position, new Vector3(3 * speed, -1), Color.white);
         if (pounce == false) // ser till att fienden inte vänder sig i luften
         {
@@ -80,11 +80,11 @@ public class enemymove : MonoBehaviour
     }
     IEnumerator attack()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1); // sätter in en försening innan fienden kan attackera 
         pounce = true;
         body.constraints = RigidbodyConstraints2D.None;
-        body.constraints = RigidbodyConstraints2D.FreezeRotation;
-        body.velocity = new Vector2(speed * 4, 1);
+        body.constraints = RigidbodyConstraints2D.FreezeRotation; 
+        body.velocity = new Vector2(speed * 4, 1); // avfyrar fienden mot spelaren 
         yield return new WaitForSeconds(1);
         atacking = false;
     }
