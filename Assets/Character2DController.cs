@@ -23,6 +23,7 @@ public class Character2DController : MonoBehaviour
 
             if (Input.GetButtonDown("Jump") && Mathf.Abs(_rigidbody.velocity.y) < 0.001f)
             {
+                SoundManagerScript.PlaySound("jump");
                 _rigidbody.AddForce(new Vector2(0, JumpForce), ForceMode2D.Impulse);
             }
         }
