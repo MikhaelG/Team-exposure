@@ -95,6 +95,7 @@ public class enemymove : MonoBehaviour
             dash = collision.transform.GetComponent<DashAbility>();
             if (dash.DMG == false && invulsecs == false) //Gör att man tar damage när man inte dashar och inte har invul frames. - Daniel
             {
+                SoundManagerScript.PlaySound("hit");   //spela ta skada ljud - Mikhael
                 damage = collision.GetComponent<damageplayer>(); // om fienden kolliderar med spelaren så skapar scriptet en referens till scriptet med health - Gustav
                 damage.health--; //här tar spelet bort health från spelaren - Gustav
                 print(damage.health);

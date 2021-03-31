@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-    public static AudioClip jumpSound, dashSound; //de ljud som ska spelas - Mikhael
+    public static AudioClip jumpSound, dashSound, hitSound; //de ljud som ska spelas - Mikhael
     static AudioSource audioSrc;
 
     void Start()
     {
         jumpSound = Resources.Load<AudioClip>("jump"); //referenser
         dashSound = Resources.Load<AudioClip>("dash");
+        hitSound = Resources.Load<AudioClip>("hit");
         audioSrc = GetComponent<AudioSource>();
     }
 
@@ -29,6 +30,10 @@ public class SoundManagerScript : MonoBehaviour
 
             case "dash":
                 audioSrc.PlayOneShot(dashSound); //spela ljudet en gång när man gör dash - Mikhael
+                break;
+           
+            case "hit":
+                audioSrc.PlayOneShot(hitSound); //spela ljudet en gång när man tar skada - Mikhael
                 break;
         }
     }

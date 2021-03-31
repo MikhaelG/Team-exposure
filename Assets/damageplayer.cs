@@ -17,5 +17,6 @@ public class damageplayer : MonoBehaviour
             SceneManager.LoadScene("level"); //spelaren startar om när dens liv blir under noll - Gustav
         }
         healthcount.text = "health:" + health; // updaterar ui med health - Gustav
+        
     }
 }
