@@ -8,7 +8,7 @@ public class Checkpoint : MonoBehaviour
 
     void Start()
     {
-        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>(); //hitta gamemaster med tagen gm - Mikhael
     }
 
 
@@ -16,7 +16,7 @@ public class Checkpoint : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            gm.lastCheckPointPos = transform.position;
+            gm.lastCheckPointPos = transform.position;  //ifall tag är player, då byts lastcheckpointpos till nuvarande - Mikhael
         }
     }
 }
