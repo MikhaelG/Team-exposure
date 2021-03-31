@@ -32,6 +32,7 @@ public class DashAbility : MonoBehaviour
             Invoke("StopDash", 1); //Väntar 1 sekdund och aktiverar StopDash. - Daniel
             move.MoveAccess = false; //Ställer om MoveAccess från Character2DController till false. På så sätt kan man inte öka eller bromsa sin hastighet under en dash. - Daniel
             DMG = true; //Ställer om DMG till true.
+            SoundManagerScript.PlaySound("dash"); //Spela dash ljud - Mikhael
         }
     }
     void StopDash()

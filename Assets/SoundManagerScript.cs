@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class SoundManagerScript : MonoBehaviour
 {
-    public static AudioClip jumpSound;
+    public static AudioClip jumpSound, dashSound;
     static AudioSource audioSrc;
 
     // Start is called before the first frame update
     void Start()
     {
         jumpSound = Resources.Load<AudioClip>("jump");
-
+        dashSound = Resources.Load<AudioClip>("dash");
         audioSrc = GetComponent<AudioSource>();
     }
 
@@ -27,6 +27,10 @@ public class SoundManagerScript : MonoBehaviour
         {
             case "jump":
                 audioSrc.PlayOneShot(jumpSound);
+                break;
+
+            case "dash":
+                audioSrc.PlayOneShot(dashSound);
                 break;
         }
     }
