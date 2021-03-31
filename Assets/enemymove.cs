@@ -8,14 +8,19 @@ public class enemymove : MonoBehaviour
     public float speed = -1;
     public bool pounce = false;
     public damageplayer damage;
-    DashAbility dash;
+    public DashAbility dash;
     public bool invulsecs = false;
     public bool atacking = false;
+    public Animator anim;
+    public SpriteRenderer sprite;
+    public int raycastdist;
     // Start is called before the first frame update
     void Start()
     {
         body = GetComponent<Rigidbody2D>();
         dash = GetComponent<DashAbility>();
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -31,7 +36,7 @@ public class enemymove : MonoBehaviour
             }
         }
 
-        RaycastHit2D groundcheck = Physics2D.Raycast(transform.position, new Vector2(0,-2), 1, 1);
+        RaycastHit2D groundcheck = Physics2D.Raycast(transform.position, new Vector2(0,-2), raycastdist, 1);
         Debug.DrawRay(transform.position, new Vector2(0, -1), Color.white); 
         if (groundcheck.collider != null && atacking == false)
         {
@@ -49,7 +54,21 @@ public class enemymove : MonoBehaviour
             StopCoroutine(jumps());
             StartCoroutine(attack()); //kollar efter spelaren framför fienden. om den uptäcks så hoppar den mot spelaren - Gustav
         }
-        
+        if (speed < 1)
+        {
+            sprite.flipX = true;
+        } else
+        {
+            sprite.flipX = false;
+        }
+        if (pounce == true)
+        {
+            anim.SetFloat("jumping", 1);
+        }
+        else
+        {
+            anim.SetFloat("jumping", body.velocity.y);
+        }
     }
     IEnumerator jumps()
     {

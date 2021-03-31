@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class animations : MonoBehaviour
 {
-    public Animator Animator;
+    public UnityEngine.Animator Animator;
     public float direction = 1;
     public Rigidbody2D rb;
+    public SpriteRenderer sprite;
+    public DashAbility dash;
 
     // Start is called before the first frame update
     void Start()
     {
-        Animator = GetComponent<Animator>();
+        Animator = GetComponent<UnityEngine.Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
+        dash = GetComponent<DashAbility>();
     }
 
     // Update is called once per frame
@@ -31,10 +35,10 @@ public class animations : MonoBehaviour
 
         if (direction == -1)
         {
-            gameObject.transform.localScale = new Vector3(-1, 1, 1); // vänder spelaren i lämplig rikttning utifrån riktningen som den senast gick mot - Gustav
+            sprite.flipX = true; // vänder spelaren i lämplig rikttning utifrån riktningen som den senast gick mot - Gustav
         } else
         {
-            gameObject.transform.localScale = new Vector3(1, 1, 1);
+            sprite.flipX = false;
         }
         if (Input.GetButtonDown("Jump")) // startar animationen för att hoppa - Gustav
         {
@@ -43,5 +47,6 @@ public class animations : MonoBehaviour
         {
             Animator.SetFloat("jump", rb.velocity.y);
         }
+        Animator.SetBool("dashing", dash.DMG);
     }
 }
