@@ -23,7 +23,7 @@ public class GameMaster : MonoBehaviour
 
     public void resetcheckpoint()
     {
-        lastCheckPointPos = startingposition;
+        lastCheckPointPos = startingposition; //gör så att man spawnas i början och inte i sista checkpointen - Mikhael
     } 
 
 }
