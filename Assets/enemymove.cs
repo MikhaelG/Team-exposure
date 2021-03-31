@@ -26,8 +26,8 @@ public class enemymove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3 * speed, -1), 5*raycastdist, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA kollar i riktningen som fienden rör sig i efter en kant - Gustav
-        Debug.DrawRay(transform.position, new Vector3(3 * speed, -1), Color.white);
+        RaycastHit2D edge = Physics2D.Raycast(transform.position, new Vector2(3 * speed, -2*raycastdist), 5, 1); // OBS VIKTIGT MÅSTE VARA PÅ LAGER 1 FÖR ATT FUNGERA kollar i riktningen som fienden rör sig i efter en kant - Gustav
+        Debug.DrawRay(transform.position, new Vector3(3 * speed, -2*raycastdist), Color.white);
         if (pounce == false) // ser till att fienden inte vänder sig i luften
         {
             if (edge.collider == null)
@@ -37,7 +37,7 @@ public class enemymove : MonoBehaviour
         }
 
         RaycastHit2D groundcheck = Physics2D.Raycast(transform.position, new Vector2(0,-2), raycastdist, 1);
-        Debug.DrawRay(transform.position, new Vector2(0, -1), Color.white); 
+        Debug.DrawRay(transform.position, new Vector2(0, -2)*raycastdist, Color.white); 
         if (groundcheck.collider != null && atacking == false)
         {
             pounce = false;
@@ -46,7 +46,7 @@ public class enemymove : MonoBehaviour
         }
 
         RaycastHit2D playercheck = Physics2D.Raycast(transform.position, new Vector2(5 * speed, 0), 5, 1);
-        Debug.DrawRay(transform.position, new Vector3(5 * speed, 0), Color.white);
+        Debug.DrawRay(transform.position, new Vector3(5 * speed, 0)*raycastdist, Color.white);
 
         if (playercheck.collider != null && pounce == false)
         {

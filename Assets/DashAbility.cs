@@ -9,14 +9,13 @@ public class DashAbility : MonoBehaviour
     private Rigidbody2D rb;
     public bool hasDashed = false;
     public bool DMG = false;
-    Boss boss;
+    public Boss boss;
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         move = GetComponent<Character2DController>();
-        boss = GetComponent<Boss>();
     }
 
     // Update is called once per frame
@@ -50,7 +49,9 @@ public class DashAbility : MonoBehaviour
         {
             hasDashed = false; //Ställer tillbaka hasDashed till true när man nuddar marken så att man kan dasha igen. - Daniel
         }
-
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         if (collision.gameObject.CompareTag("Enemy") && DMG == true)
         {
             Destroy(collision.gameObject); //Om man nuddar en enemy när DMG är true, vilket den är under en dash, så förstörs fiendeobjektet. - Daniel
@@ -60,6 +61,7 @@ public class DashAbility : MonoBehaviour
         {
             boss.BossHP--; //Om man dashar in i ett objekt med tagen "Boss", vilket bossen kommer att ha, sänker man BossHP i Boss scriptet. - Daniel
         }
+
     }
 }
 

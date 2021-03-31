@@ -418,7 +418,7 @@ MonoBehaviour:
   atacking: 0
   anim: {fileID: 0}
   sprite: {fileID: 0}
-  raycastdist: 0
+  raycastdist: 1
 --- !u!61 &618137625
 BoxCollider2D:
   m_ObjectHideFlags: 0
