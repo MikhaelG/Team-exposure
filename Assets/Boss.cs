@@ -19,6 +19,7 @@ public class Boss : MonoBehaviour
         if(BossHP <1)
         {
             SceneManager.LoadScene("menu"); //Om BossHP har ett värde under 1 så kommer den ladda "menu" scenen. - Daniel
+            GameMaster.instance.resetcheckpoint();
         }
     }
 }
